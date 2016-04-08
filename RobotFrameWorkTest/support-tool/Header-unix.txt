@@ -1,0 +1,103 @@
+*** Settings ***
+Library           SSHLibrary
+Resource          ../support-tool/Mack.txt
+Library           OperatingSystem
+
+*** Keywords ***
+Open Mongo
+    [Arguments]    ${AIM_TEST_ENVIRONMENT}
+    Run Keyword if    ${AIM_TEST_ENVIRONMENT}== "dev"    Connect to Mongodb    mongo.internal.dev.mse-esp.com    8080    ELSE IF    ${AIM_TEST_ENVIRONMENT}== "qa"
+    ...    Connect to Mongodb    10.0.111.21    27017    ELSE IF    ${AIM_TEST_ENVIRONMENT}=="uat"    Connect to Mongodb
+    ...    10.0.111.21    27017
+
+Data Clean
+    [Arguments]    ${AIM_TEST_ENVIRONMENT}    ${AIM_DB_NAME}
+    Open Mongo    ${AIM_TEST_ENVIRONMENT}
+    Comment    Remove Mongodb Records    aim_qa    programtypes    {}
+    Comment    Remove Mongodb Records    aim_qa    programs    {}
+    Comment    Remove Mongodb Records    aim_qa    framerates    {}
+    Comment    Remove Mongodb Records    aim_qa    activeformatdescriptions    {}
+    Remove Mongodb Records    ${AIM_DB_NAME}    assets    {}
+
+Set Global Variables
+    [Arguments]    ${AIM_TEST_ENVIRONMENT}
+    Run Keyword And Continue On Failure    Run Keyword If    ${AIM_TEST_ENVIRONMENT}=="dev"    Set Global Variable DEV
+    Run Keyword And Continue On Failure    Run Keyword If    ${AIM_TEST_ENVIRONMENT}=="qa"    Set Global Variable QA
+    Run Keyword And Continue On Failure    Run Keyword If    ${AIM_TEST_ENVIRONMENT}=="uat"    Set Global Variable UAT
+
+Set Global Variable DEV
+    Set Global Variable    ${AIM_SERVICE_SERVER}    aim-services.internal.dev.mse-esp.com
+    Set Global Variable    ${AIM_DB_SERVER}    mongo.dev.mse-esp.com
+    Set Global Variable    ${AIM_DB_NAME}    aim_dev
+    Set Global Variable    ${AIM_TEST_ENVIRONMENT}    "dev"
+
+Set Global Variable QA
+    Set Global Variable    ${AIM_SERVICE_SERVER}    lb.aim-services.qa.mse-esp.com
+    Set Global Variable    ${AIM_DB_SERVER}    mongo.qa.mse-esp.com
+    Set Global Variable    ${AIM_DB_NAME}    aim_qa
+    Set Global Variable    ${AIM_TEST_ENVIRONMENT}    "qa"
+
+Set Global Variable UAT
+    Set Global Variable    ${AIM_SERVICE_SERVER}    lb.aim-services.uat.mse-esp.com
+    Set Global Variable    ${AIM_DB_SERVER}    mongo.uat.mse-esp.com
+    Set Global Variable    ${AIM_DB_NAME}    aim_uat
+    Set Global Variable    ${AIM_TEST_ENVIRONMENT}    "uat"
+
+Set Service Header
+    [Arguments]    ${AIM_TEST_ENVIRONMENT}
+    ${stdout}    Run    python27 support-tool/aim-token-tool.py ${AIM_TEST_ENVIRONMENT}
+    ${nonce}    get json value    ${stdout}    /nonce
+    ${ts}    get json value    ${stdout}    /ts
+    ${Authorization}    get json value    ${stdout}    /Authorization
+    ${f_nonce}    Evaluate    str(${nonce}).replace('"','')
+    ${f_ts}    Evaluate    str(${ts}).replace('"','')
+    ${f_Authorization}    Evaluate    str(${Authorization}).replace('"','')
+    Set Request Header    nonce    ${f_nonce}
+    Set Request Header    Content-Type    application/json
+    Set Request Header    ts    ${f_ts}
+    Set Request Header    Authorization    ${f_Authorization}
+    Set Request Header    X-AIM-USERID    john.smith@hbo.com
+
+Set Service Header SOAP
+    [Arguments]    ${AIM_TEST_ENVIRONMENT}
+    ${stdout}    Run    python27 support-tool/soap-token-tool.py ${AIM_TEST_ENVIRONMENT}
+    ${nonce}    get json value    ${stdout}    /nonce
+    ${ts}    get json value    ${stdout}    /ts
+    ${Authorization}    get json value    ${stdout}    /Authorization
+    ${f_nonce}    Evaluate    str(${nonce}).replace('"','')
+    ${f_ts}    Evaluate    str(${ts}).replace('"','')
+    ${f_Authorization}    Evaluate    str(${Authorization}).replace('"','')
+    Set Request Header    nonce    ${f_nonce}
+    Set Request Header    Content-Type    application/json
+    Set Request Header    ts    ${f_ts}
+    Set Request Header    Authorization    ${f_Authorization}
+    Set Request Header    X-AIM-USERID    john.smith@hbo.com
+
+Set Service Header TEAM
+    [Arguments]    ${AIM_TEST_ENVIRONMENT}
+    ${stdout}    Run    python27 support-tool/team-token-tool.py ${AIM_TEST_ENVIRONMENT}
+    ${nonce}    get json value    ${stdout}    /nonce
+    ${ts}    get json value    ${stdout}    /ts
+    ${Authorization}    get json value    ${stdout}    /Authorization
+    ${f_nonce}    Evaluate    str(${nonce}).replace('"','')
+    ${f_ts}    Evaluate    str(${ts}).replace('"','')
+    ${f_Authorization}    Evaluate    str(${Authorization}).replace('"','')
+    Set Request Header    nonce    ${f_nonce}
+    Set Request Header    Content-Type    application/json
+    Set Request Header    ts    ${f_ts}
+    Set Request Header    Authorization    ${f_Authorization}
+    Set Request Header    X-AIM-USERID    john.smith@hbo.com
+
+Set Service Header ESP
+    [Arguments]    ${AIM_TEST_ENVIRONMENT}
+    ${stdout}    Run    python esp-token-tool.py ${AIM_TEST_ENVIRONMENT}
+    ${nonce}    get json value    ${stdout}    /nonce
+    ${ts}    get json value    ${stdout}    /ts
+    ${Authorization}    get json value    ${stdout}    /Authorization
+    ${f_nonce}    Evaluate    str(${nonce}).replace('"','')
+    ${f_ts}    Evaluate    str(${ts}).replace('"','')
+    ${f_Authorization}    Evaluate    str(${Authorization}).replace('"','')
+    Set Request Header    nonce    ${f_nonce}
+    Set Request Header    Content-Type    application/json
+    Set Request Header    ts    ${f_ts}
+    Set Request Header    Authorization    ${f_Authorization}

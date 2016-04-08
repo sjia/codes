@@ -1,0 +1,142 @@
+*** Settings ***
+Test Teardown
+Force Tags        V1
+Default Tags      AID
+Resource          ../support-tool/Mack.txt
+Resource          ../support-tool/Header-unix.txt
+Resource          ../test-data/test-variable.txt
+
+*** Variables ***
+
+*** Test Cases ***
+ServiceTestSample
+    [Tags]    V2
+    Open Mongo    ${_TEST_ENVIRONMENT}
+    Remove Mongodb Records    ${_DB_NAME}    programs    {}
+    Create Http Context    ${_SERVICE_SERVER}    https
+    Comment    ${random}    Generate Random String    2    [LOWER]
+    : FOR    ${INDEX}    IN RANGE    0    4
+    \    Set Service Header    ${_TEST_ENVIRONMENT}
+    \    set Request Body    @{CREATE_PROGRAM_REQUEST_BODY}[${INDEX}]
+    \    PUT    @{CREATE_PROGRAM_ENDPOINT}[${INDEX}]
+    \    ${GET_RES_BODY}    Get Response Body
+    \    Response Status Code Should Equal    201 Created
+    \    Should Be Valid Json    ${GET_RES_BODY}
+    \    Should Not Be Empty    ${GET_RES_BODY}
+    \    ${urn}    Get JSON Value    ${GET_RES_BODY}    /urn
+    \    log    ${GET_RES_BODY}
+
+Para - Legality Check
+    [Tags]
+    @{Para_LIST}    Evaluate    str(${Para}).split('-')
+    ${SUB_CODE}    Evaluate    str('@{Para_LIST}[1]')[:-2]
+    Should Contain    ' EE,MZ,RW,EST'    ${SUB_CODE}    #Check the Code is in BIZ Required Scope
+    ${len}    Evaluate    len(str('@{Para_LIST}[0]'))
+    Should Be True    int(${len})>=10    \    # Check Length of Base ID Should Be No less than 10
+
+Creating Service
+    [Tags]    MEV-3351
+    Create Http Context    ${_SERVICE_SERVER}    https
+    Set Service Header    ${_TEST_ENVIRONMENT}
+    Set Request Body    {"program": "xyz::grow:onepiece:abc","languages": ["EN", "ES"] }
+    Run Keyword And Continue On Failure    Run Keyword And Expect Error    Request should have succeeded, but was "400 Bad Request".    POST    /v1/asset/relativepath
+    Response Status Code Should Equal    400 Bad Request
+    ${std_out}    Get Response Body
+    Should Be Equal    ${std_out}    {"invalid":["season is required"]}
+
+Replace Sub ID Services TEAM
+    ${Para}    Generate aid V2 TEAM    @{VALID_REQUEST_BODY}[0]    /Para
+    Set Service Header    ${_TEST_ENVIRONMENT}
+    Comment    set request body    {"userID":"enluan.jia@outlook.com"}
+    POST    /assetname/url
+    Response Status Code Should Equal    200 OK
+    ${GET_RES_BODY}    Get Response Body
+    ${NEW_Para}    Get Json Value    ${GET_RES_BODY}    /Para
+    ${CACULATE_NEW_Para}    Evaluate    ${Para}[:-1]+str(int(${Para}[-1])+1)
+    ${NEW_Para}    Evaluate    ${NEW_Para}.replace('"','')
+    Should be Equal    ${NEW_Para}    ${CACULATE_NEW_Para}
+    Set Service Header    ${_TEST_ENVIRONMENT}
+    Run Keyword And Expect Error    Request should have succeeded, but was "404 Not Found".    GET    /assetname/url/${Para}    #Retrieve Response Body by Old Para and Expect 404 Not Found and Empty Return
+    ${OldPara_RES_BODY}    Get Response Body
+    Should Be Empty    ${OldPara_RES_BODY}
+
+Search Asset under Simple Mode_03
+    [Tags]
+    Create Http Context    ${_SERVICE_SERVER}    https
+    Set Service Header    ${_TEST_ENVIRONMENT}
+    Run Keyword And Continue On Failure    Get    ${ASSET_PATH}search?q=123456
+    Run Keyword And Continue On Failure    Response Status Code Should Equal    200 OK
+    ${stdout}    Get Response Body
+    Log    Search Succeed with 200 OK
+    Should Contain    ${stdout}    "externalIDs":[{"_key":1,"id":"123456","label":"FocusID"}]
+
+Set Service Header
+    [Documentation]    If ${Env}==qa Then:
+    ...    54.208.211.63
+    ...    Else
+    ...    54.208.98.143
+    ${Env}=    set variable    "fake_uat"
+    Run Keyword if    ${Env} == "fake_qa"    Open Connection    54.208.211.63    ELSE IF    ${Env}=="fake_uat"    Open Connection
+    ...    54.208.98.143
+    Login With Public Key    ${linux server user lgoin name}    \\${winpath}\\${private linux server key name}.pem
+    ${stdout}    Execute Command    python {python file in server which return json}.py ${Env}
+    ${field name A}    get json value    ${stdout}    /${field name A}
+    ${field name B}    get json value    ${stdout}    /${field name B}
+    ${field name C}    get json value    ${stdout}    /${field name C}
+    ${f_field name A}    Evaluate    str(${field name A}).replace('"','')
+    ${f_field name B}    Evaluate    str(${field name B}).replace('"','')
+    ${f_field name C}    Evaluate    str(${field name C}).replace('"','')
+    Set Request Header    nonce    ${f_field name A}
+    Set Request Header    Content-Type    application/json
+    Set Request Header    ts    ${f_field name B}
+    Set Request Header    Authorization    ${f_field name C}
+
+MongoDBLib Usage
+    [Documentation]    This cases to demo interaction via MongoDBLibrary.
+    [Tags]    demo
+    Connect to MongoDB    mongo.{envName}.{serverName}.com    8080
+    ${allRes}    Get MongoDB Collection Count    ${dbName}    ${CollectionName}
+    Log    ${allRes}
+    ${status}    Retrieve Mongodb Records With Desired Fields    esp    ${CollectionName}    {"key":"value"}    status    false
+    log    ${CollectionName}: ${status}
+
+Mongo GetStatusByObjectId
+    [Documentation]    User Need define python function to search by ObjectID
+    [Tags]    demo
+    Get Deliver Status    ${mongo server name}    ${port}    ${ObjectID}
+
+Read Test variable from Both Variable File and Mack
+    [Documentation]    BuiltIn Library
+    ...
+    ...    Variable file: test-variables.py
+    ...    Path: C:\Users\sjira\Desktop\esp\Sjira
+    ...
+    ...    This case to demo:
+    ...    1. read value from Variable file
+    ...    2. read value from Mack.txt
+    [Tags]    demo
+    log    @{relative_path}[0]
+    log    @{relative_path}[1]
+    log    @{guids}[0]
+    log    @{guids}[1]
+    log    @{COMPARE_BODY}[0]
+    Should Be Equal    @{COMPARE_BODY}[0]    ${compare_context}
+
+Web Automation
+    [Documentation]    Web Automation with Selenium2Library.
+    [Tags]    demo
+    [Timeout]
+    Open Browser    http://amqp.qa.mse-esp.com:8080/#/    ff
+    Set Browser Implicit Wait    10 seconds
+    Input Text    name=username    guest    #Xpath=//input[@name='username']
+    Input Password    Xpath=//input[@name='password']    guest
+    Click Button    xpath=//input[@value='Login']
+    Click Element    xpath=//ul[@id="tabs"]/li[5]/a[@href="#/queues"]
+    Input Text    xpath=//input[@id="filter"]    ${searchContext}
+    sleep    2 seconds
+    Click Element    xpath=//a[@href="#/queues/%2F/${queuename}.queue"]
+    Click Element    xpath=//div[@id="main"]/div[5]/h2
+    Input Text    xpath=//textarea[@name="payload"]    ${context}
+    Click Button    xpath=//input[@value="Publish message"]
+    Close Browser
+    [Teardown]

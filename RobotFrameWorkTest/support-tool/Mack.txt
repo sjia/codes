@@ -1,0 +1,170 @@
+*** Settings ***
+Library           SSHLibrary
+Library           XML
+Library           HttpLibrary.HTTP
+Library           OperatingSystem
+Library           Process
+Library           Collections
+Library           String
+Library           Screenshot
+Resource          ../support-tool/Header-unix.txt
+Resource          ../test-data/test-variable.txt
+Library           MongoDBLibrary
+
+*** Keywords ***
+Init Setup
+    [Arguments]    ${AIM_TEST_ENVIRONMENT}
+    Set Global Variables    ${AIM_TEST_ENVIRONMENT}
+    Data Clean    ${AIM_TEST_ENVIRONMENT}    ${AIM_DB_NAME}
+
+Generate External ID
+    [Arguments]    ${REQUEST_BODY}    ${XPATH}
+    ${GUID}    Generate aid    ${REQUEST_BODY}    /guid
+    Create Http Context    ${AIM_SERVICE_SERVER}    https
+    Set Service Header    ${AIM_TEST_ENVIRONMENT}
+    Set Request Body    { "id": 123456, "label": "FocusID", "userID":"john.smith@hbo.com" }
+    POST    /v1/asset/${GUID}/external-id
+    Response Status Code Should Equal    201 Created
+    ${GET_RES_BODY}    Get Response Body
+    ${PARZED_FIELD}    Get Json Value    ${GET_RES_BODY}    ${XPATH}
+    [Return]    ${PARZED_FIELD}    ${GUID}
+
+Delete Service
+    [Arguments]    ${Endpoint}
+    Set Service Header    ${AIM_TEST_ENVIRONMENT}
+    Comment    set request Body    {"userID":"abc@hbo.com"}
+    Delete    ${Endpoint}
+    Response Status Code Should Equal    200 OK
+
+Open RIDE report
+    Open Browser    file:///c:/users/sjira/appdata/local/temp/RIDE1ditlh.d/log.html    ff
+
+Check Service Response Format
+    [Arguments]    ${Field1}    ${Field2}
+    [Documentation]    Display the Service Response Log.
+    ...    inout Fields Name releative path, it would retrieve value from Response, and verify if it is not emplty.
+    log    ...............Response Information to View...............
+    ${GET_RES_STATUS}    Get Response Status
+    ${GET_RES_BODY}    Get Response Body
+    Should Be Valid Json    ${GET_RES_BODY}
+    ${READ_FROM_RETURN}    Get Json Value    ${GET_RES_BODY}    ${Field1}
+    Should Not Be Empty    ${READ_FROM_RETURN}
+    ${READ_FROM_RETURN}    Get Json Value    ${GET_RES_BODY}    ${Field2}
+    Should Not Be Empty    ${READ_FROM_RETURN}
+    Log    ...............Test Log...............
+
+Generate aid
+    [Arguments]    ${REQUEST_BODY}    ${XPATH}
+    [Documentation]    Usage:
+    ...    Create Service | Request Body
+    Create Http Context    ${AIM_SERVICE_SERVER}    https
+    Set Service Header    ${AIM_TEST_ENVIRONMENT}
+    Set Request Body    ${REQUEST_BODY}
+    POST    ${ASSET_PATH}
+    Response Status Code Should Equal    201 Created
+    ${GET_RES_BODY}    Get Response Body
+    ${PARZED_FIELD}    Get Json Value    ${GET_RES_BODY}    ${XPATH}
+    Comment    ${DESCRIPTOR}    Get Json Value    ${GET_RES_BODY}    /descriptor
+    [Return]    ${PARZED_FIELD}
+
+Generate aid V2 SOAP
+    [Arguments]    ${REQUEST_BODY}    ${XPATH}
+    [Documentation]    Usage:
+    ...    Create Service | Request Body
+    Create Http Context    ${AIM_SERVICE_SERVER}    https
+    Set Service Header    ${AIM_TEST_ENVIRONMENT}
+    Set Request Body    ${REQUEST_BODY}
+    POST    /v2/asset/soap
+    Response Status Code Should Equal    201 Created
+    ${GET_RES_BODY}    Get Response Body
+    ${PARZED_FIELD}    Get Json Value    ${GET_RES_BODY}    ${XPATH}
+    Comment    ${DESCRIPTOR}    Get Json Value    ${GET_RES_BODY}    /descriptor
+    [Return]    ${PARZED_FIELD}
+
+Generate aid V2 TEAM
+    [Arguments]    ${REQUEST_BODY}    ${XPATH}
+    [Documentation]    Usage:
+    ...    Create Service | Request Body
+    Create Http Context    ${AIM_SERVICE_SERVER}    https
+    Set Service Header    ${AIM_TEST_ENVIRONMENT}
+    Set Request Body    ${REQUEST_BODY}
+    POST    /v2/asset/team
+    Response Status Code Should Equal    201 Created
+    ${GET_RES_BODY}    Get Response Body
+    ${PARZED_FIELD}    Get Json Value    ${GET_RES_BODY}    ${XPATH}
+    Comment    ${DESCRIPTOR}    Get Json Value    ${GET_RES_BODY}    /descriptor
+    [Return]    ${PARZED_FIELD}
+
+Create Service: PUT
+    [Arguments]    ${REQUEST_BODY}    ${ENDPOINT}
+    [Documentation]    Usage:
+    ...    Create Service | Request Body
+    Create Http Context    ${AIM_SERVICE_SERVER}    https
+    Set Service Header    ${AIM_TEST_ENVIRONMENT}
+    Set Request Body    ${REQUEST_BODY}
+    PUT    ${ENDPOINT}
+    Response Status Code Should Equal    201 Created
+
+Descripe Service
+    [Arguments]    ${ENDPOINT}    ${GUID}
+    Create Http Context    ${AIM_SERVICE_SERVER}    https
+    Set Service Header    ${AIM_TEST_ENVIRONMENT}
+    Get    ${ENDPOINT}
+    Check Service Response Format    /guid    /descriptor
+    Response Status Code Should Equal    200 OK
+    ${GET_RES_BODY}    Get Response Body
+    Response Body Should Contain    ${GUID}
+    Log    Describe Succeed
+
+Advanced Search Service
+    [Arguments]    ${REQUEST_BODY}    ${ENDPOINT}
+    Create Http Context    ${AIM_SERVICE_SERVER}    https
+    Set Service Header    ${AIM_TEST_ENVIRONMENT}
+    Set Request Body    ${REQUEST_BODY}
+    POST    ${ENDPOINT}
+    Response Status Code Should Equal    200 OK
+    Log    Search Succeed with 200 OK
+
+Update Service
+    [Arguments]    ${GUID}    ${REQUEST_BODY}
+    Create Http Context    ${AIM_SERVICE_SERVER}    https
+    Set Service Header    ${AIM_TEST_ENVIRONMENT}
+    Set Request Body    {${REQUEST_BODY}}
+    PUT    /v1/asset/${GUID}
+
+Replace Service
+    [Arguments]    ${GUID}
+    Create Http Context    ${AIM_SERVICE_SERVER}    https
+    Set Service Header    ${AIM_TEST_ENVIRONMENT}
+    POST    /v1/asset/${GUID}/replace/base
+    Response Status Code Should Equal    200 OK
+    ${GET_RES_BODY}    Get Response Body
+    ${NEW_GUID}    Get Json Value    ${GET_RES_BODY}    /guid
+    [Return]    ${NEW_GUID}
+
+Login AIM Console
+    [Arguments]    ${uname}    ${pwd}
+    Open Browser    https://${AIM_CONSOLE_SERVER}/#/    ff
+    Set Browser Implicit Wait    8 seconds
+    Input Text    xpath=//input[@ng-model="login.username"]    ${uname}    #set username
+    Input Password    xpath=//input[@ng-model="login.password"]    ${pwd}    #set pwd
+    Click Button    xpath=//button[@ng-click="doLogin(login.username, login.password)"]
+
+Prepare Data
+    Create Http Context    ${AIM_SERVICE_SERVER}    https
+    Set Service Header    ${AIM_TEST_ENVIRONMENT}
+    Set Request Body    { \ \ "program": "hbo:aim:program:op:lfto", \ \ "programType": "hbo:aim:programtype:do", \ \ "frameRate": "hbo:aim:framerate:2398p", \ \ "afd": "hbo:aim:afd:133", \ \ "sor": "team", \ \ "languages": [ \ \ \ \ "en", \ \ \ \ "jp" \ \ ], \ \ "season": 1, \ \ "episode": 12, \ \ "bitRate": 32.4, \ \ "userID": "john.smith@hbo.com" }
+    POST    /v1/asset/
+    Response Status Code Should Equal    201 Created
+    Comment    ${GET_RES_BODY}    Get Response Body
+    Comment    ${GUID}    Get Json Value    ${GET_RES_BODY}    /guid
+    Comment    ${DESCRIPTOR}    Get Json Value    ${GET_RES_BODY}    /descriptor
+    [Return]    ${GUID}    ${DESCRIPTOR}
+
+Transfer unicode into JSON
+    Comment    Open Mongo    ${AIM_TEST_ENVIRONMENT}
+    ${allRes}    set Variable    {u'label': u'1'}
+    ${std}    Evaluate    str(${allRes}).replace('u','')
+    ${std1}    Evaluate    str(${std}).replace("'","\\"")
+    Should be valid Json    ${std1}
+    ${s}    Get Json Value    ${std1}    /label
