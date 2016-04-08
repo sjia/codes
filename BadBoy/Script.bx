@@ -1,0 +1,439 @@
+<?xml version='1.0' encoding='UTF-8'?>
+<WebScript v='30204'>
+	<Variables>
+	</Variables>
+	<nextScriptId>10</nextScriptId>
+	<Object>null</Object>
+	<dataSources>
+	</dataSources>
+	<Script v='3'>
+		<ver>14</ver>
+		<id>1</id>
+		<Summary v='3'>
+			<played>1</played>
+			<succeeded>1</succeeded>
+			<maxResponseTime>48337</maxResponseTime>
+			<averageResponseTime>48337</averageResponseTime>
+		</Summary>
+		<childCount>1</childCount>
+		<ChildItems>
+			<SuiteItem v='1'>
+				<ver>14</ver>
+				<id>4</id>
+				<Summary v='3'>
+					<played>1</played>
+					<succeeded>1</succeeded>
+					<maxResponseTime>48337</maxResponseTime>
+					<averageResponseTime>48337</averageResponseTime>
+				</Summary>
+				<childCount>1</childCount>
+				<ChildItems>
+					<TestItem v='3'>
+						<ver>14</ver>
+						<id>3</id>
+						<Summary v='3'>
+							<played>1</played>
+							<succeeded>1</succeeded>
+							<maxResponseTime>48337</maxResponseTime>
+							<averageResponseTime>48337</averageResponseTime>
+						</Summary>
+						<childCount>1</childCount>
+						<ChildItems>
+							<Step v='4'>
+								<ver>14</ver>
+								<id>2</id>
+								<Summary v='3'>
+									<played>1</played>
+									<succeeded>1</succeeded>
+									<maxResponseTime>48337</maxResponseTime>
+									<averageResponseTime>48337</averageResponseTime>
+								</Summary>
+								<childCount>1</childCount>
+								<ChildItems>
+									<Request v='10'>
+										<ver>14</ver>
+										<id>5</id>
+										<Summary v='3'>
+											<played>1</played>
+											<succeeded>1</succeeded>
+											<maxResponseTime>48337</maxResponseTime>
+											<averageResponseTime>48337</averageResponseTime>
+										</Summary>
+										<childCount>3</childCount>
+										<ChildItems>
+											<ResponsesItem v='4'>
+												<ver>14</ver>
+												<id>9</id>
+												<Summary v='3'>
+													<played>1</played>
+													<succeeded>1</succeeded>
+													<maxResponseTime>48337</maxResponseTime>
+													<averageResponseTime>48337</averageResponseTime>
+												</Summary>
+												<childCount>1</childCount>
+												<ChildItems>
+													<Response v='3'>
+														<ver>14</ver>
+														<id>8</id>
+														<Summary v='3'>
+															<played>1</played>
+															<succeeded>1</succeeded>
+															<maxResponseTime>48337</maxResponseTime>
+															<averageResponseTime>48337</averageResponseTime>
+														</Summary>
+														<timeMs>48337</timeMs>
+														<size>8900</size>
+														<encodedContent>false</encodedContent>
+														<content>&lt;!DOCTYPE html PUBLIC &quot;-//W3C//DTD XHTML 1.0 Transitional//EN&quot; &quot;http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd&quot;&gt;
+&lt;html id=&quot;ng-app&quot; ng-app=&quot;espConsole&quot; lang=&quot;en&quot; ng-controller=&quot;MainController&quot; ng-init=&quot;init()&quot;&gt;
+&lt;head&gt;
+&lt;base href=&quot;/console/&quot;&gt;
+&lt;meta http-equiv=&quot;Content-Type&quot; content=&quot;text/html; charset=UTF-8&quot; /&gt;
+&lt;meta name=&quot;description&quot; content=&quot;HBO ESP Console&quot; /&gt;
+&lt;meta name=&quot;keywords&quot; content=&quot;HBO, ESP Console&quot; /&gt;
+&lt;title&gt;HBO ESP Console&lt;/title&gt;
+&lt;link rel=&quot;shortcut icon&quot; href=&quot;images/go_icon.ico&quot; /&gt;
+&lt;link rel=&quot;stylesheet&quot; href=&quot;lib/bootstrap/dist/css/bootstrap.min.css&quot; media=&quot;all&quot;/&gt;
+&lt;link rel=&quot;stylesheet&quot; href=&quot;lib/bootstrap/dist/css/bootstrap-theme.min.css&quot; media=&quot;all&quot;/&gt;
+&lt;link rel=&quot;stylesheet&quot; href=&quot;lib/select2/select2.css&quot; media=&quot;all&quot; /&gt;
+&lt;link rel=&quot;stylesheet&quot; href=&quot;lib/nvd3/nv.d3.css&quot; media=&quot;all&quot;/&gt;
+&lt;link rel=&quot;stylesheet&quot; href=&quot;lib/angular-busy/dist/angular-busy.min.css&quot; media=&quot;all&quot;/&gt;
+&lt;link rel=&quot;stylesheet&quot; href=&quot;css/espconsole.css&quot; media=&quot;all&quot; /&gt;
+&lt;link rel=&quot;stylesheet&quot; href=&quot;css/style1.css&quot; media=&quot;all&quot; /&gt;
+&lt;link rel=&quot;stylesheet&quot; href=&quot;css/AddStyleByJK.css&quot; media=&quot;all&quot; /&gt;
+&lt;link rel=&quot;stylesheet&quot; href=&quot;themes/darkSpace.css&quot; media=&quot;all&quot; /&gt;
+&lt;!-- &lt;link ng-repeat=&quot;stylesheet in stylesheets&quot; ng-href=&quot;{{stylesheet.href}}&quot; rel=&quot;stylesheet&quot; /&gt;  --&gt;
+
+&lt;!-- &lt;link rel=&quot;stylesheet&quot; href=&quot;css/animations.css&quot; media=&quot;all&quot; /&gt; --&gt;
+&lt;meta http-equiv=&quot;X-UA-Compatible&quot; content=&quot;IE=edge,chrome=1&quot; /&gt;
+&lt;!--[if IE]&gt;&lt;link href=&quot;css/IE8.css&quot; rel=&quot;stylesheet&quot; type=&quot;text/css&quot; /&gt;&lt;![endif]--&gt;
+&lt;!--[if IE]&gt;
+    &lt;script type=&quot;text/javascript&quot; src=&quot;lib/json/json3.min.js&quot;&gt;&lt;/script&gt;
+	&lt;script type=&quot;text/javascript&quot; src=&quot;lib/html5/html5.js&quot;&gt;&lt;/script&gt;
+	&lt;script type=&quot;text/javascript&quot; src=&quot;lib/html5/excanvas.compiled.js&quot;&gt;&lt;/script&gt;
+&lt;![endif]--&gt;
+
+&lt;script src=&quot;lib/jquery/jquery.min.js&quot;&gt;&lt;/script&gt;
+&lt;script src=&quot;lib/jquery-ui/ui/minified/jquery-ui.custom.min.js&quot;&gt;&lt;/script&gt;
+&lt;script src=&quot;lib/angular/angular.js&quot;&gt;&lt;/script&gt;
+&lt;script src=&quot;lib/angular-cookies/angular-cookies.min.js&quot;&gt;&lt;/script&gt;
+&lt;script src=&quot;lib/angular-resource/angular-resource.min.js&quot;&gt;&lt;/script&gt;
+&lt;script src=&quot;lib/angular-route/angular-route.min.js&quot;&gt;&lt;/script&gt;
+&lt;script src=&quot;lib/bootstrap/dist/js/bootstrap.min.js&quot;&gt;&lt;/script&gt;
+&lt;script src=&quot;lib/bootstrap-hover-dropdown/bootstrap-hover-dropdown.min.js&quot;&gt;&lt;/script&gt;
+&lt;script src=&quot;lib/angular-bootstrap/ui-bootstrap-tpls.min.js&quot;&gt;&lt;/script&gt;
+&lt;script src=&quot;lib/d3/d3.js&quot;&gt;&lt;/script&gt;
+&lt;script src=&quot;lib/angular-nvd3/dist/angular-nvd3.js&quot;&gt;&lt;/script&gt;
+&lt;script src=&quot;lib/nvd3/nv.d3.js&quot;&gt;&lt;/script&gt;
+&lt;script src=&quot;lib/angularjs-nvd3-directives/dist/angularjs-nvd3-directives.js&quot;&gt;&lt;/script&gt;
+&lt;script src=&quot;lib/lodash/dist/lodash.min.js&quot;&gt;&lt;/script&gt;
+&lt;script src=&quot;lib/angularjs-dropdown-multiselect/dist/angularjs-dropdown-multiselect.min.js&quot;&gt;&lt;/script&gt;
+
+&lt;script src=&quot;lib/ngInfiniteScroll/build/ng-infinite-scroll.js&quot;&gt;&lt;/script&gt;
+&lt;script src=&quot;lib/ng-grid/build/ng-grid.js&quot;&gt;&lt;/script&gt;
+&lt;script src=&quot;lib/angular-ui-select2/src/select2.js&quot;&gt;&lt;/script&gt;
+&lt;script src=&quot;lib/select2/select2.min.js&quot;&gt;&lt;/script&gt;
+&lt;script src=&quot;lib/angular-busy/dist/angular-busy.min.js&quot;&gt;&lt;/script&gt;
+&lt;script src =&quot;lib/bootstrap-treeview/dist/bootstrap-treeview.min.js&quot;&gt;&lt;/script&gt;
+
+&lt;script src=&quot;lib/underscore/underscore.js&quot;&gt;&lt;/script&gt;
+&lt;script src=&quot;lib/JSONPath/lib/jsonpath.js&quot;&gt;&lt;/script&gt;
+&lt;script src=&quot;lib/blueimp-tmpl/js/tmpl.js&quot;&gt;&lt;/script&gt;
+
+&lt;script src=&quot;lib/jssor-slider/js/jssor.slider.mini.js&quot;&gt;&lt;/script&gt;
+
+&lt;script src=&quot;js/routingConfig.js&quot;&gt;&lt;/script&gt;
+&lt;script src=&quot;js/app.js&quot;&gt;&lt;/script&gt;
+&lt;script src=&quot;js/util/commonUtil.js&quot;&gt;&lt;/script&gt;
+&lt;script src=&quot;js/util/consoleUtil.js&quot;&gt;&lt;/script&gt;
+&lt;script src=&quot;js/controllers/loginController.js&quot;&gt;&lt;/script&gt;
+&lt;script src=&quot;js/controllers/mainController.js&quot;&gt;&lt;/script&gt;
+&lt;script src=&quot;js/controllers/homeController.js&quot;&gt;&lt;/script&gt;
+&lt;script src=&quot;js/controllers/securityController.js&quot;&gt;&lt;/script&gt;
+&lt;script src=&quot;js/controllers/endpointController.js&quot;&gt;&lt;/script&gt;
+&lt;script src=&quot;js/controllers/monitorController.js&quot;&gt;&lt;/script&gt;
+&lt;script src=&quot;js/controllers/offeringController.js&quot;&gt;&lt;/script&gt;
+&lt;script src=&quot;js/controllers/configurationController.js&quot;&gt;&lt;/script&gt;
+&lt;script src=&quot;js/controllers/credentialController.js&quot;&gt;&lt;/script&gt;
+&lt;script src=&quot;js/controllers/credentialChangeController.js&quot;&gt;&lt;/script&gt;
+&lt;script src=&quot;js/controllers/deviceController.js&quot;&gt;&lt;/script&gt;
+&lt;script src=&quot;js/controllers/auditController.js&quot;&gt;&lt;/script&gt;
+&lt;script src=&quot;js/controllers/deviceController.js&quot;&gt;&lt;/script&gt;
+&lt;script src=&quot;js/controllers/overviewController.js&quot;&gt;&lt;/script&gt;
+&lt;script src=&quot;js/controllers/atiController.js&quot;&gt;&lt;/script&gt;
+&lt;script src=&quot;js/services/authService.js&quot;&gt;&lt;/script&gt;
+&lt;script src=&quot;js/services/daoservices.js&quot;&gt;&lt;/script&gt;
+&lt;script src=&quot;js/services/auditService.js&quot;&gt;&lt;/script&gt;
+&lt;script src=&quot;js/services/constants.js&quot;&gt;&lt;/script&gt;
+&lt;script src=&quot;js/services/commonModalService.js&quot;&gt;&lt;/script&gt;
+&lt;script src=&quot;js/services/pipelineService.js&quot;&gt;&lt;/script&gt;
+&lt;script src=&quot;js/services/errorservice.js&quot;&gt;&lt;/script&gt;
+&lt;script src=&quot;js/filters.js&quot;&gt;&lt;/script&gt;
+&lt;script src=&quot;js/directives.js&quot;&gt;&lt;/script&gt;
+&lt;script src=&quot;js/customInput.js&quot;&gt;&lt;/script&gt;
+&lt;script src=&quot;js/util/HeaderPinAndFooterFixed.js&quot;&gt;&lt;/script&gt;
+&lt;script src=&quot;js/errorMessage.js&quot;&gt;&lt;/script&gt;
+&lt;/head&gt;
+
+&lt;body&gt;
+&lt;div class=&quot;BG&quot;&gt;
+		&lt;div class=&quot;bodyTopLight&quot;&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;header ng-hide=&quot;isLogin()&quot;&gt;
+    &lt;nav id=&quot;navigationbar&quot;&gt;
+        &lt;div class=&quot;navcontainer&quot;&gt;
+            &lt;div class=&quot;ESPLOGO&quot; reload=&quot;/home&quot;&gt;&lt;/div&gt;
+            &lt;div class=&quot;serviceContainer&quot;&gt;
+                &lt;div id=&quot;serviceBox&quot; class=&quot;serviceBox&quot;&gt;
+                    &lt;div class=&quot;serviceCell good&quot; ng-repeat=&quot;service in listGlobalServices&quot; ng-click=&quot;toggleService($event,service.id)&quot;&gt;{{service.id}}&lt;/div&gt;
+                &lt;/div&gt;
+                &lt;div id=&quot;editSevice&quot; class=&quot;editService&quot;&gt;&lt;/div&gt;
+            &lt;/div&gt;
+            &lt;div id=&quot;navmenu&quot; class=&quot;MenuContainer&quot;&gt;
+                &lt;div class=&quot;menu&quot;&gt;
+                    &lt;div class=&quot;menuCell weNowAt&quot;&gt;&lt;div id=&quot;openMenu&quot; class=&quot;menuIcon&quot;&gt;&lt;/div&gt;{{pageLoaded}}
+
+                    &lt;/div&gt;
+
+
+                    &lt;div class=&quot;menuCell&quot; style=&quot;margin-right: 80px;&quot; ng-show=&quot;authorize(access.admin, user.roles)&quot;&gt;Administrator
+                        &lt;div class=&quot;menudrop&quot;&gt;
+                            &lt;ul&gt;
+                                &lt;li reload=&quot;/admin/endpoints/S3&quot;&gt;End Points&lt;/li&gt;
+                                &lt;li reload=&quot;/admin/securityMgmt/user/list&quot;&gt;Security Management&lt;/li&gt;
+                                &lt;li reload=&quot;/admin/credentials/list&quot;&gt;Credential Management&lt;/li&gt;
+                                &lt;li reload=&quot;/admin/profile/serviceprofile&quot;&gt;Profile Management&lt;/li&gt;
+                                &lt;li reload=&quot;/admin/audit&quot;&gt;Audit Management&lt;/li&gt;
+                                &lt;li reload=&quot;/admin/ati&quot;&gt;Admin Tool Image&lt;/li&gt;
+                            &lt;/ul&gt;
+                        &lt;/div&gt;
+                    &lt;/div&gt;
+                    &lt;div class=&quot;menuCell&quot; ng-show=&quot;authorize(access.user, user.roles)&quot;&gt;Overview
+                        &lt;div class=&quot;menudrop&quot;&gt;
+                            &lt;ul&gt;
+                                &lt;li reload=&quot;/overview/overall&quot;&gt;Overall View&lt;/li&gt;
+                            &lt;/ul&gt;
+                        &lt;/div&gt;
+                    &lt;/div&gt;
+                    &lt;div class=&quot;menuCell&quot; ng-show=&quot;authorize(access.user, user.roles)&quot;&gt;Monitor
+                        &lt;div class=&quot;menudrop&quot;&gt;
+                            &lt;ul&gt;
+                                &lt;li reload=&quot;/monitor/cso/list&quot;&gt;CSO&lt;/li&gt;
+                                &lt;li reload=&quot;/monitor/offering/list&quot;&gt;Offering&lt;/li&gt;
+                            &lt;/ul&gt;
+                        &lt;/div&gt;
+                    &lt;/div&gt;
+
+                &lt;/div&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+    &lt;/nav&gt;
+    &lt;div class=&quot;navBottomLight&quot;&gt;&lt;/div&gt;
+&lt;/header&gt;
+&lt;div id=&quot;CT&quot; class=&quot;container&quot;&gt;
+		&lt;div class=&quot;pageFirstLine&quot; ng-hide=&quot;isLogin()&quot;&gt;Greetings, &lt;span class=&quot;username&quot;&gt;{{ user.username }}&lt;/span&gt;. &lt;a ng-click=&quot;logout()&quot; reload=&quot;/home&quot; style=&quot;cursor: pointer; font-weight: bold&quot;&gt;&amp;nbsp;&amp;nbsp;Log Out&lt;/a&gt;
+				&lt;div class=&quot;Icon setting&quot;&gt;&lt;/div&gt;
+				&lt;input id=&quot;homeSearcherInput&quot; class=&quot;homePageSearcher&quot; onblur=&quot;this.value=&apos;&apos;&quot; /&gt;
+		&lt;/div&gt;
+		&lt;div ng-view&gt;&lt;/div&gt;
+		&lt;div class=&quot;asFooter&quot;&gt;
+
+
+		&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&quot;footerLight&quot;&gt;&lt;/div&gt;
+&lt;footer class=&quot;footerFixed&quot;&gt;
+		&lt;div class=&quot;BG&quot;&gt;&lt;/div&gt;
+		&lt;div class=&quot;footerInfo&quot;&gt;
+				&lt;div class=&quot;footerLOGO&quot;&gt;&lt;/div&gt;
+				&lt;div class=&quot;siteLink&quot;&gt;
+                    &lt;a href=&quot;#&quot;&gt;Company Site&lt;/a&gt; &lt;a href=&quot;#&quot;&gt;About&lt;/a&gt; &lt;a href=&quot;#&quot;&gt;Sitemap&lt;/a&gt; &lt;a href=&quot;#&quot;&gt;Support Contact&lt;/a&gt; &lt;a href=&quot;#&quot;&gt;Help&lt;/a&gt;
+
+
+                &lt;/div&gt;
+
+				&lt;div class=&quot;copyrightInfo&quot;&gt; This website is intended for viewing solely in the following territories. &lt;br /&gt;
+						Â© 2015 HBO Go. All Rights Reserved. Home Box OfficeÂ®,&lt;br /&gt;
+						HBOÂ® and CinemaxÂ® are registered trademarks of Home Box Office, Inc.&lt;br /&gt;
+						HBO Signature, HBO Family and HBO Hits are service marks of Home Box Office, Inc.&lt;br /&gt;
+				&lt;/div&gt;
+		&lt;/div&gt;
+&lt;/footer&gt;
+&lt;/body&gt;
+
+&lt;/html&gt;
+</content>
+														<totalSize>8900</totalSize>
+														<timeStamp>2015-03-20 05:17:03</timeStamp>
+														<logContent/>
+													</Response>
+												</ChildItems>
+												<Summary v='3'>
+													<maxResponseTime>0</maxResponseTime>
+													<averageResponseTime>0</averageResponseTime>
+												</Summary>
+											</ResponsesItem>
+											<Request v='10'>
+												<ver>14</ver>
+												<id>6</id>
+												<Summary v='3'>
+													<maxResponseTime>0</maxResponseTime>
+													<averageResponseTime>0</averageResponseTime>
+												</Summary>
+												<timeoutEnabled>false</timeoutEnabled>
+												<Object>null</Object>
+												<targetWindow/>
+												<itemName/>
+												<documentation/>
+												<waitForPageToLoad>false</waitForPageToLoad>
+												<sourceLocation/>
+												<recordResponses>true</recordResponses>
+												<quiescenceTimeMs>500</quiescenceTimeMs>
+												<disabled>false</disabled>
+												<ignoreErrors>false</ignoreErrors>
+												<errorFilter/>
+												<Object>null</Object>
+												<host>console.qa.mse-esp.com</host>
+												<path>/console/#/login</path>
+												<protocol>https</protocol>
+												<resource/>
+												<targetFrame/>
+												<label/>
+												<headers>Referer: https://console.qa.mse-esp.com/console/#/home</headers>
+												<multipartBoundary/>
+												<Object>null</Object>
+												<lenientSubrequestCount>false</lenientSubrequestCount>
+												<formCharset/>
+												<method>1</method>
+												<waitForSubRequests>false</waitForSubRequests>
+											</Request>
+											<Request v='10'>
+												<ver>14</ver>
+												<id>7</id>
+												<Summary v='3'>
+													<maxResponseTime>0</maxResponseTime>
+													<averageResponseTime>0</averageResponseTime>
+												</Summary>
+												<timeoutEnabled>false</timeoutEnabled>
+												<Object>null</Object>
+												<targetWindow/>
+												<itemName/>
+												<documentation/>
+												<waitForPageToLoad>false</waitForPageToLoad>
+												<sourceLocation/>
+												<recordResponses>true</recordResponses>
+												<quiescenceTimeMs>500</quiescenceTimeMs>
+												<disabled>false</disabled>
+												<ignoreErrors>false</ignoreErrors>
+												<errorFilter/>
+												<Object>null</Object>
+												<host/>
+												<path>partials/login.html</path>
+												<protocol/>
+												<resource/>
+												<targetFrame/>
+												<label/>
+												<headers/>
+												<multipartBoundary/>
+												<Object>null</Object>
+												<lenientSubrequestCount>false</lenientSubrequestCount>
+												<formCharset/>
+												<method>1</method>
+												<waitForSubRequests>false</waitForSubRequests>
+												<executionMode>1</executionMode>
+											</Request>
+										</ChildItems>
+										<timeoutEnabled>false</timeoutEnabled>
+										<Object>null</Object>
+										<targetWindow/>
+										<itemName/>
+										<documentation/>
+										<waitForPageToLoad>false</waitForPageToLoad>
+										<sourceLocation/>
+										<recordResponses>true</recordResponses>
+										<quiescenceTimeMs>514</quiescenceTimeMs>
+										<disabled>false</disabled>
+										<ignoreErrors>false</ignoreErrors>
+										<errorFilter/>
+										<Object>null</Object>
+										<host>console.qa.mse-esp.com</host>
+										<path>/console/#/home</path>
+										<protocol>https</protocol>
+										<resource/>
+										<targetFrame/>
+										<isActive>1</isActive>
+										<label/>
+										<headers>Referer: file:///C:/Program%20Files%20(x86)/Badboy/html/start.html
+</headers>
+										<multipartBoundary/>
+										<Object>null</Object>
+										<lenientSubrequestCount>false</lenientSubrequestCount>
+										<formCharset>windows-1252</formCharset>
+										<method>1</method>
+										<waitForSubRequests>false</waitForSubRequests>
+									</Request>
+								</ChildItems>
+								<timeoutEnabled>false</timeoutEnabled>
+								<Object>null</Object>
+								<targetWindow/>
+								<itemName/>
+								<documentation/>
+								<waitForPageToLoad>false</waitForPageToLoad>
+								<sourceLocation/>
+								<recordResponses>true</recordResponses>
+								<quiescenceTimeMs>500</quiescenceTimeMs>
+								<disabled>false</disabled>
+								<ignoreErrors>false</ignoreErrors>
+								<errorFilter/>
+								<Object>null</Object>
+								<name>Step 1</name>
+								<repetitions>1</repetitions>
+								<repeatType>1</repeatType>
+								<repeatVariable/>
+								<incrementAutomatically>true</incrementAutomatically>
+								<incrementAll>true</incrementAll>
+								<expanded>1</expanded>
+							</Step>
+						</ChildItems>
+						<timeoutEnabled>false</timeoutEnabled>
+						<Object>null</Object>
+						<targetWindow/>
+						<itemName/>
+						<documentation/>
+						<waitForPageToLoad>false</waitForPageToLoad>
+						<sourceLocation/>
+						<recordResponses>true</recordResponses>
+						<quiescenceTimeMs>500</quiescenceTimeMs>
+						<disabled>false</disabled>
+						<ignoreErrors>false</ignoreErrors>
+						<errorFilter/>
+						<Object>null</Object>
+						<title>Test 1</title>
+						<template/>
+						<expanded>1</expanded>
+					</TestItem>
+				</ChildItems>
+				<timeoutEnabled>false</timeoutEnabled>
+				<Object>null</Object>
+				<targetWindow/>
+				<itemName>Test Suite 1</itemName>
+				<documentation/>
+				<waitForPageToLoad>false</waitForPageToLoad>
+				<sourceLocation/>
+				<recordResponses>true</recordResponses>
+				<quiescenceTimeMs>500</quiescenceTimeMs>
+				<disabled>false</disabled>
+				<ignoreErrors>false</ignoreErrors>
+				<errorFilter/>
+				<Object>null</Object>
+				<expanded>1</expanded>
+			</SuiteItem>
+		</ChildItems>
+		<defaultHeaders>User-Agent: Mozilla/5.0 (compatible; MSIE 9.0; Windows NT 6.1; WOW64; Trident/5.0)
+Accept: application/x-ms-application, image/jpeg, application/xaml+xml, image/gif, image/pjpeg, application/x-ms-xbap, application/vnd.ms-excel, application/vnd.ms-powerpoint, application/msword, */*
+Accept-Language: en-US
+</defaultHeaders>
+		<itemName>Script.bx</itemName>
+		<documentation/>
+	</Script>
+</WebScript>
