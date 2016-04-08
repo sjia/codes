@@ -1,0 +1,25 @@
+main()
+{
+    int n;
+    printf("请输入数字n以解决n阶汉诺塔问题：\n");
+    scanf("%d",&n);
+    hanoi(n,'A','B','C');
+}
+
+void hanoi(char A,char B,char C,int n)
+{
+    if(n==1)
+    {
+      printf("Move disk %d from %c to %c\n",A,C,n);
+    }
+    else
+    {
+      hanoi(A,C,B, n-1);
+      printf("Move disk %d from %c to %c\n",n,A,C);
+      hanoi(B,A,C,n-1,);
+    }
+}
+
+//以上代码c-free5编译通过。
+
+//代码出处：http://www.cnblogs.com/yanlingyin/ 一条鱼~
