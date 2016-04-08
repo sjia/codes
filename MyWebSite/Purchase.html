@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet" type="text/css" href="mystyle.css"/>
+<h1 class="center">Purchase</h1>
+</head>
+	<body>
+		<div class="center bodyfont">
+			<form name ="input" action="html_form_action.asp" method="get">
+				<fieldset>	
+				    <legend>My Infomation</legend>
+					<p>
+						<input type="radio" name="type" value="BigBedRoom" />BigBed
+						<input type="radio" name="type" value="SuitesRoom"> SuiteRoom 
+					</p>
+					City:&nbsp
+					<select name="location"> 
+						<option value="Mexico">Mexico</option>>
+						<option value="Shanghai">Shanghai</option>>
+					</select>
+					&nbspFromDate:&nbsp
+						<input type="text" value="02/28/2016"size="18" name="date" onblur="if(this.value == ''){this.style.color = '#ACA899'; this.value = '02/28/2016'; }" onfocus="if(this.value == '02/28/2016'){this.value =''; this.style.color = '#000000'; }" style="color:#ACA899;"/>
+					&nbspToDate:&nbsp
+						<input type="text" size="18" value="03/01/2016" name="date"onblur="if(this.value == ''){this.style.color = '#ACA899'; this.value = '03/01/2016'; }" onfocus="if(this.value == '03/01/2016'){this.value =''; this.style.color = '#000000'; }" style="color:#ACA899;"/>
+					Total People: <input type="text" size="18" name="count"/>
+					<p>
+						<textarea rows="3" cols="30" onblur="if(this.value == ''){this.style.color = '#ACA899'; this.value = 'Say something'; }" onfocus="if(this.value == 'Say something'){this.value =''; this.style.color = '#000000'; }" style="color:#ACA899;">Say something
+						</textarea>
+					</p>
+						<input type="Submit" value="Submit"/>
+				</fieldset>
+			</form>
+		</div>
+	</body>
+</html>
