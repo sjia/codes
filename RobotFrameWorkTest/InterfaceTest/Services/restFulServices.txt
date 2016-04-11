@@ -121,22 +121,3 @@ Read Test variable from Both Variable File and Mack
     log    @{guids}[1]
     log    @{COMPARE_BODY}[0]
     Should Be Equal    @{COMPARE_BODY}[0]    ${compare_context}
-
-Web Automation
-    [Documentation]    Web Automation with Selenium2Library.
-    [Tags]    demo
-    [Timeout]
-    Open Browser    http://amqp.qa.mse-esp.com:8080/#/    ff
-    Set Browser Implicit Wait    10 seconds
-    Input Text    name=username    guest    #Xpath=//input[@name='username']
-    Input Password    Xpath=//input[@name='password']    guest
-    Click Button    xpath=//input[@value='Login']
-    Click Element    xpath=//ul[@id="tabs"]/li[5]/a[@href="#/queues"]
-    Input Text    xpath=//input[@id="filter"]    ${searchContext}
-    sleep    2 seconds
-    Click Element    xpath=//a[@href="#/queues/%2F/${queuename}.queue"]
-    Click Element    xpath=//div[@id="main"]/div[5]/h2
-    Input Text    xpath=//textarea[@name="payload"]    ${context}
-    Click Button    xpath=//input[@value="Publish message"]
-    Close Browser
-    [Teardown]
