@@ -1,0 +1,29 @@
+*** Settings ***
+Resource          ..\\SupportFile\\Configuration.txt
+
+*** Test Cases ***
+Read OutStreamFile
+    List Files In Directory    ${file_dir}\\dataFile    \    #读文件列表
+    Comment    Log File    ${file_dir}\\dataFile\\f3.json    \    #读文件内容
+
+Append File to OutFolder
+    Comment    Create File    ${file_dir}\\CreationTest.txt
+    Append To File    ${file_dir}\\dataFile\\CreationTest.txt    bird Singing...
+
+Parse Json
+    ${JSON}    Log File    \\Users\\ejia003\\Desktop\\demo\\dataFile\\f3.json    #读取文件内容到参数
+    ${res}    Parse Json    ${JSON}    #解析JSON String为JSON 数据结构
+    Length Should be    ${res}    2    #长度
+    ${name}    Get Json Value    ${JSON}    /uname    #解读字段数值
+
+Parse XML
+    ${XML}=    Log File    ${xml_path}
+    ${root} =    Parse XML    ${XML}    \    #获取root
+    Should Be Equal    ${root.tag}    metadata    \    #验证tag
+    ${onboard}    Get Element    ${root}    Onboard    #获取第一层元素
+    Comment    XML.Element Text Should Be    ${onboard}    20100501    \    #验证第一层元素值
+    ${img}    Get Element    ${root}    image
+    Element Attribute Should Be    ${img}    type    EMP_145x81    #验证第一层元素属性
+    ${card-id}    Get Element    ${root}    */card-id    #获取第二层元素
+    ${parent}    Get Element    ${root}    */card-id/..    #获取当前元素的上一层元素
+    Should Be Equal    ${parent.tag}    image    \    #验证tag名

@@ -1,0 +1,15 @@
+*** Settings ***
+Library           BuiltIn
+Library           OperatingSystem
+Library           XML
+Library           Process
+Library           Selenium2Library
+Library           AutoItLibrary
+Library           Screenshot
+Library           HttpLibrary.HTTP
+
+*** Variables ***
+${file_dir}       \\Users\\ejia003\\Desktop\\demo
+${xml_path}       \\Users\\ejia003\\Desktop\\demo\\dataFile\\Emp.xml
+
+*** Keywords ***

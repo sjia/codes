@@ -1,0 +1,12 @@
+*** Settings ***
+Resource          ..\\SupportFile\\Configuration.txt
+
+*** Test Cases ***
+Take Screenshot
+    Take Screenshot    ${file_dir}/Screenshot/mypic
+
+SeleniumTest
+    Open Browser    ff
+    Set Browser Implicit Wait    10s
+    Comment    Get    http://www.baidu.com
+    Comment    Capture Page Screenshot
