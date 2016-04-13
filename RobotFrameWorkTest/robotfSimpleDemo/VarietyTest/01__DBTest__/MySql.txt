@@ -1,0 +1,50 @@
+*** Settings ***
+Suite Setup       Connect To Database    pymysql    ${DBName}    ${DBUser}    ${DBPass}    ${DBHost}    ${DBPort}
+Suite Teardown    Disconnect From Database
+Test Setup
+Force Tags        MYSQL
+Library           DatabaseLibrary
+Library           OperatingSystem
+
+*** Variables ***
+${DBHost}         localhost
+${DBName}         my_db_test
+${DBPass}         123
+${DBPort}         3306
+${DBUser}         testUser
+
+*** Test Cases ***
+Create person table
+    [Setup]    Execute SQL String    Drop Table IF EXISTS person
+    ${output} =    Execute SQL String    CREATE TABLE person (id integer unique,first_name varchar(20),last_name varchar(20));
+    Log    ${output}
+    Comment    Should Be Equal As Strings    ${output}    None
+
+Insert Data person table
+    Comment    ${output} =    Execute SQL Script    ./${DBName}_insertData.sql
+    ${output} =    Execute SQL Script    .\\VarietyTest\\SupportFile\\my_db_test_insertData.sql
+    Log    ${output}
+    Should Be Equal As Strings    ${output}    None
+
+Retrieve records from person table
+    ${output} =    Execute SQL String    SELECT * FROM person;
+    Log    ${output}
+    Should Be Equal As Strings    ${output}    None
+
+Verify person Description - Expect Failure
+    [Tags]    db    smoke
+    Comment    Query db for table column descriptions
+    @{queryResults} =    Description    SELECT * FROM person LIMIT 1;
+    Log Many    @{queryResults}
+    ${output} =    Set Variable    ${queryResults[0]}
+    Should Be Equal As Strings    ${output}    (u'id', 3, None, 11, 11, 0, 1)
+    ${output} =    Set Variable    ${queryResults[1]}
+    Should Be Equal As Strings    ${output}    (u'first_name', 253, None, 20, 20, 0, 1)
+    ${output} =    Set Variable    ${queryResults[2]}
+    Should Be Equal As Strings    ${output}    (u'last_name', 253, None, 20, 20, 0, 1)
+    ${NumColumns} =    Get Length    ${queryResults}
+    Should Be Equal As Integers    ${NumColumns}    3
+
+Verify Delete All Rows From Table - person
+    Delete All Rows From Table    person
+    Comment    Sleep    2s

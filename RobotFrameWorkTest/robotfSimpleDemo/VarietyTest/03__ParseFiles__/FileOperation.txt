@@ -1,0 +1,13 @@
+*** Settings ***
+Resource          ..\\SupportFile\\Configuration.txt
+
+*** Test Cases ***
+Parse Json
+    ${JSON}    Log File    .\\VarietyTest\\SupportFile\\Example.json    #读取文件内容到参数
+    ${res}    Parse Json    ${JSON}    #解析JSON String为JSON 数据结构
+    Length Should be    ${res}    2    #长度
+    ${name}    Get Json Value    ${JSON}    /firstname    #解读字段数值
+
+Create File and Append Data to OutFolder
+    Comment    Create File    .\\VarietyTest\\SupportFile\\CreationTest.txt
+    Append To File    .\\VarietyTest\\SupportFile\\CreationTest.txt    bird Singing .awk...

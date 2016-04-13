@@ -1,0 +1,8 @@
+*** Settings ***
+Resource          ..\\SupportFile\\Configuration.txt
+Library           CustomLibrary
+
+*** Test Cases ***
+WebSelenium
+    [Timeout]
+    OpenBr    http://www.baidu.com

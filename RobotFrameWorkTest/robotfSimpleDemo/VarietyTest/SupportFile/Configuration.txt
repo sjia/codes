@@ -1,0 +1,14 @@
+*** Settings ***
+Library           BuiltIn
+Library           OperatingSystem
+Library           XML
+Library           Process
+Library           Selenium2Library
+Library           AutoItLibrary
+Library           Screenshot
+Library           HttpLibrary.HTTP
+
+*** Variables ***
+${xml_path}       .\\VarietyTest\\SupportFile\\plant.xml
+
+*** Keywords ***
